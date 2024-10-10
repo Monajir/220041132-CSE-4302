@@ -1,0 +1,26 @@
+CXX = g++
+CXXFLAGS = -Wall -g
+
+# Executable name
+TARGET = program
+
+# Source files (wildcard to include all .cpp files in the directory)
+SRCS = $(wildcard *.cpp)
+
+# Object files (replace .cpp with .o)
+OBJS = $(SRCS:.cpp=.o)
+
+# Rule to build the final executable
+$(TARGET): $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS)
+
+# Rule to build object files from .cpp files
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+# Clean up
+clean:
+	rm -f $(OBJS) $(TARGET)
+
+# Phony targets
+.PHONY: clean
